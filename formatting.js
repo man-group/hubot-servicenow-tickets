@@ -13,12 +13,12 @@ function frontendUrl(recordId) {
 
 function directUrl(recordId) {
   return api.config.ROOT_URL +
-          "/nav_to.do?uri=" + api.config.tableNameFromId(recordId) +
+          "/nav_to.do?uri=" + api.config.tableName(recordId) +
           ".do?sys_id=" + recordId;
 }
 
 function url(recordId) {
-  if (api.config.webFieldsFromId(recordId)) {
+  if (api.config.webFields(recordId)) {
     return frontendUrl(recordId);
   } else {
     return directUrl(recordId);
@@ -31,7 +31,7 @@ function formatRows(rows) {
   var prettyRows = _.map(rows, function(row) {
     var shortDescription = row.short_description || "(no description)";
     var id = api.recordId(row);
-    var endDateGmt = row[api.config.dateFieldFromId(id)];
+    var endDateGmt = row[api.config.dateField(id)];
     var endDate = endDateGmt ? moment(endDateGmt).format('DD MMM YYYY') : null;
 
     var ticketUrl = url(id);

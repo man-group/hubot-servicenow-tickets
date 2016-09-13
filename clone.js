@@ -10,7 +10,7 @@ var _ = require('underscore');
 module.exports = function(robot) {
   // For every ticket prefix that we know how to clone, define a help command.
   _.each(api.config.PREFIXES, function(prefix) {
-    var cloneFields = api.config.cloneFieldsFromPrefix(prefix);
+    var cloneFields = api.config.cloneFields(prefix);
     if (cloneFields) {
       robot.commands.push("hubot clone " + prefix + "1234 - Create a new " + prefix +
                           " whose fields match " + prefix + "1234.");
@@ -20,7 +20,7 @@ module.exports = function(robot) {
   robot.respond(/clone ([A-Z]+\d+)/i, function(response) {
     var recordId = response.match[1];
     var prefix = api.config.getPrefix(recordId);
-    var cloneFields = api.config.cloneFieldsFromPrefix(prefix);
+    var cloneFields = api.config.cloneFields(prefix);
     if (!cloneFields) {
       response.send("I don't know how to clone a " + prefix +
                     " (you need to see cloneFields in config.yaml).");

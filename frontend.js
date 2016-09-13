@@ -63,7 +63,7 @@ function fetchDetails(recordId, callback) {
 
     // Read out the fields that config.yaml has specified.
     var steps = [];
-    _.each(api.config.webFieldsFromId(recordId), function(webField) {
+    _.each(api.config.webFields(recordId), function(webField) {
       var friendlyName = _.keys(webField)[0];
       var fields = webField[friendlyName];
 
@@ -90,7 +90,7 @@ function fetchDetails(recordId, callback) {
         short_description: recordDetails.short_description || "(no description)",
         description: recordDetails.description,
         creator: recordDetails.sys_created_by,
-        end_date: formatDate(recordDetails[api.config.dateFieldFromId(recordId)]),
+        end_date: formatDate(recordDetails[api.config.dateField(recordId)]),
         state: recordDetails.state,
         approval: recordDetails.approval,
         steps: steps,
@@ -112,7 +112,7 @@ module.exports = function(robot) {
   return robot.router.get(/\/servicenow\/([A-Z]+\d+)/, function(request, response) {
     var recordId = request.params[0];
     var prefix = api.config.getPrefix(recordId);
-    if (!api.config.webFieldsFromId(recordId)) {
+    if (!api.config.webFields(recordId)) {
       response.end("I don't know how to display a " + prefix + " (you need to set web_fields in config.yaml).");
       return;
     }

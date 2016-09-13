@@ -15,7 +15,7 @@ var _ = require('underscore');
 function dropUndatedRecords(records) {
   var datedRecords = [];
   _.each(records || [], function(record) {
-    var dateField = api.config.dateFieldFromId(api.recordId(record));
+    var dateField = api.config.dateField(api.recordId(record));
     if (record[dateField]) {
       datedRecords.push(record);
     }
