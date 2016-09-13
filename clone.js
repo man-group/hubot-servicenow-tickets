@@ -28,17 +28,17 @@ module.exports = function(robot) {
     }
 
     api.getRecordById(recordId, function(err, details) {
-      var hipchatUsername, knownUsers, newCrDetails, servicenowUsername;
+      var hipchatUsername, knownUsers, newRecordDetails, servicenowUsername;
       if (err) {
         response.send("Failed to clone " + recordId + ". See the log for more details.");
         console.error(err);
         return;
       }
       if (!details) {
-        response.send("No such CR.");
+        response.send("No such " + prefix + ".");
         return;
       }
-      newCrDetails = _.pick(details, cloneFields);
+      newRecordDetails = _.pick(details, cloneFields);
 
       // Assign the CR to the user who requested us to clone it.
       hipchatUsername = response.message.user.name;
@@ -56,10 +56,10 @@ module.exports = function(robot) {
           console.error(err);
           return;
         }
-        newCrDetails.requested_by = user.sys_id;
-        newCrDetails.opened_by = user.sys_id;
-        newCrDetails.u_opened_by_group = user.u_opened_by_group;
-        api.createTicket(newCrDetails, prefix, function(err, details) {
+        newRecordDetails.requested_by = user.sys_id;
+        newRecordDetails.opened_by = user.sys_id;
+        newRecordDetails.u_opened_by_group = user.u_opened_by_group;
+        api.createTicket(newRecordDetails, prefix, function(err, details) {
           var newTicketId;
           newTicketId = api.recordId(details);
           if (err) {
