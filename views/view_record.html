@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <head>
+        <title>{{recordId}} | {{short_description}}</title>
+        <link href="/static/style.css" rel="stylesheet">
+        <link href="/static/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    </head>
+    <body>
+        <h1>{{short_description}}</h1>
+
+        {{#equal state 1}}
+        <span class="status status-draft">
+            <i class="fa fa-pencil-square-o"></i>
+            Draft</span>
+        {{/equal}}
+
+        {{#equal state 2}}
+		{{#equal approval "requested"}}
+        <span class="status status-awaiting_approval">
+            <i class="fa fa-clock-o"></i>
+            Awaiting Approval</span>
+        {{/equal}}
+		{{#equal approval "approved"}}
+        <span class="status status-approved">
+            <i class="fa fa-thumbs-o-up"></i>
+            Approved</span>
+        {{/equal}}
+        {{/equal}}
+
+        {{#equal state 4}}
+        <span class="status status-cancelled">
+            <i class="fa fa-times"></i>
+            Cancelled</span>
+        {{/equal}}
+
+        {{#equal state 5}}
+        <span class="status status-approved">
+            <i class="fa fa-clock-o"></i>
+            Scheduled</span>
+        {{/equal}}
+
+        {{#equal state 7}}
+        <span class="status status-completed">
+            <i class="fa fa-check"></i>
+            Completed</span>
+        {{/equal}}
+
+        <a class="direct-link" href="{{url}}">View {{recordId}} on ServiceNow <i class="fa fa-external-link"></i></a>
+        
+        <p class="preserve-whitespace">{{linkify description recordId}}</p>
+
+        <p class="about">
+            {{#if end_date}}
+            Scheduled for {{end_date}}
+            {{else}}
+            Created
+            {{/if}}
+            by <i class="fa fa-user"></i>{{creator}}.
+        </p>
+
+        {{!-- steps is an array of pairs, e.g.
+        [['Tests Performed', ['Ran in staging']],
+         ['Steps', ['Install v1.2'], ['Restart service']]]
+        --}}
+        {{#each steps}}
+        <h2>{{this.[0]}}</h2>
+        {{#each this.[1]}}
+        <p class="preserve-whitespace">{{linkify this ../../recordId}}</p>
+        {{/each}}
+        {{/each}}
+
+        {{#if work_notes}}
+        <h2>Notes</h2>
+        {{#each work_notes}}
+        <div>
+            <div class="speech-bubble">
+                <p class="preserve-whitespace">{{linkify this.value ../../recordId}}</p>
+            </div>
+            <p>
+                <i class="fa fa-user"></i>
+                {{this.sys_updated_by}}
+                <span class="about">{{this.date}}</span>
+            </p>
+        </div>
+        {{/each}}
+        {{/if}}
+    </body>
+</html>

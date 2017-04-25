@@ -1,0 +1,29 @@
+{
+  "name": "hubot-servicenow",
+  "version": "1.0.0",
+  "description": "Fetch and describe servicenow tickets with Hubot",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint . --fix",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "hubot",
+    "servicenow"
+  ],
+  "author": "Wilfred Hughes",
+  "license": "MIT",
+  "dependencies": {
+    "consolidate": "~0.13.1",
+    "express": "^3.21.2",
+    "font-awesome": "^4.4.0",
+    "handlebars": "~3.0.3",
+    "handlebars-helper-strict-equal": "^1.0.0",
+    "moment": "^2.10.3",
+    "servicenow-lite": "^1.0.0",
+    "underscore": "~1.8.3"
+  },
+  "devDependencies": {
+    "eslint": "^3.4.0"
+  }
+}
