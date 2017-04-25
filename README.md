@@ -213,7 +213,7 @@ they have values for the current ticket. If users just enter 'N/A' or
 to hyperlinks, and provides a deep link to the relevant page on your
 servicenow instance.
 
-![web screenshot](hubot_servicenow_screenshot.png)
+![web screenshot](hubot_servicenow_frontend.png)
 
 You need to specify which fields you want to display in your
 servicenow.yaml:
