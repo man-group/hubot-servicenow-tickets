@@ -1,4 +1,4 @@
-# hubot-servicenow
+# hubot-servicenow-tickets
 
 Hubot enriches your discussions of servicenow tickets.
 

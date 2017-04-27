@@ -1,5 +1,5 @@
 {
-  "name": "hubot-servicenow",
+  "name": "hubot-servicenow-tickets",
   "version": "1.0.0",
   "description": "Fetch and describe servicenow tickets with Hubot",
   "main": "index.js",
