@@ -27,7 +27,7 @@ Hubot> CR1234: System has turned sentient (22 Sep 2029) https://servicenow.examp
 Install from npm:
 
 ```
-$ npm install hubot-servicenow --save
+$ npm install hubot-servicenow-tickets --save
 ```
 
 Configure your Hubot to use this plugin by adding your desired scripts
