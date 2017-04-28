@@ -10,15 +10,15 @@ Hubot> CR1234: System has turned sentient (22 Sep 2029) https://servicenow.examp
 <!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-generate-toc again -->
 **Table of Contents**
 
-- [hubot-servicenow](#hubot-servicenow)
+- [hubot-servicenow-tickets](#hubot-servicenow-tickets)
     - [Installation](#installation)
     - [Plugins available](#plugins-available)
-        - [hubot-servicenow/mentions](#hubot-servicenowmentions)
-        - [hubot-servicenow/find](#hubot-servicenowfind)
-        - [hubot-servicenow/users](#hubot-servicenowusers)
-        - [hubot-servicenow/clone](#hubot-servicenowclone)
-        - [hubot-servicenow/debug](#hubot-servicenowdebug)
-        - [hubot-servicenow/frontend](#hubot-servicenowfrontend)
+        - [hubot-servicenow-tickets/mentions](#hubot-servicenowmentions)
+        - [hubot-servicenow-tickets/find](#hubot-servicenowfind)
+        - [hubot-servicenow-tickets/users](#hubot-servicenowusers)
+        - [hubot-servicenow-tickets/clone](#hubot-servicenowclone)
+        - [hubot-servicenow-tickets/debug](#hubot-servicenowdebug)
+        - [hubot-servicenow-tickets/frontend](#hubot-servicenowfrontend)
 
 <!-- markdown-toc end -->
 
@@ -36,12 +36,12 @@ to external-scripts.json:
 ```
 $ cat ./external-scripts.json
 [
-  "hubot-servicenow/clone",
-  "hubot-servicenow/debug",
-  "hubot-servicenow/find",
-  "hubot-servicenow/frontend",
-  "hubot-servicenow/mentions",
-  "hubot-servicenow/users"
+  "hubot-servicenow-tickets/clone",
+  "hubot-servicenow-tickets/debug",
+  "hubot-servicenow-tickets/find",
+  "hubot-servicenow-tickets/frontend",
+  "hubot-servicenow-tickets/mentions",
+  "hubot-servicenow-tickets/users"
 ]
 ```
 
@@ -90,7 +90,7 @@ $ export http_proxy=http://proxyuser:secretpassword@myproxy.example.com
 
 ## Plugins available
 
-### hubot-servicenow/mentions
+### hubot-servicenow-tickets/mentions
 
 The mentions plugin will make Hubot respond to any mention of
 servicenow ticket types that you have configured in servicenow.yaml.
@@ -100,7 +100,7 @@ wilfred> You need to be careful, or you end up with CR1234
 Hubot> CR1234: System has turned sentient (22 Sep 2029) https://servicenow.example.com/nav_to.do?uri=change_request.do?sys_id=CR1234
 ```
 
-### hubot-servicenow/find
+### hubot-servicenow-tickets/find
 
 The find plugin allows you to search for servicenow tickets, based on
 content or creator.
@@ -122,7 +122,7 @@ Hubot> CR1002: Upgrade foo to v3 (3 March 2011) https://servicenow.example.com/n
 CR1000: Upgrade bar (1 Jan 2010) https://servicenow.example.com/nav_to.do?uri=change_request.do?sys_id=CR1000
 ```
 
-### hubot-servicenow/users
+### hubot-servicenow-tickets/users
 
 The users plugin associates chatroom usernames with servicenow
 usernames.
@@ -137,7 +137,7 @@ Wilfred> @Hubot my username is whughes
 Hubot> OK, saved.
 ```
 
-### hubot-servicenow/clone
+### hubot-servicenow-tickets/clone
 
 *The clone plugin requires the users plugin.*
 
@@ -184,7 +184,7 @@ servicenow website and inspect the input. For example,
 `<input name="sys_display.change_request.requested_by" type="text">`
 indicates that the 'Requested By' field is called `requested_by`.
 
-### hubot-servicenow/debug
+### hubot-servicenow-tickets/debug
 
 The debug plugin dumps tickets, so you can see the raw data.
 
@@ -200,7 +200,7 @@ Wilfred> @Hubot dump CR1234 approval
 Hubot> "approved"
 ```
 
-### hubot-servicenow/frontend
+### hubot-servicenow-tickets/frontend
 
 The frontend plugin provides a stripped-down read-only web frontend,
 as an alternative to the default servicenow UI.
