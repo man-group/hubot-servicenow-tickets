@@ -2,6 +2,7 @@
   "name": "hubot-servicenow-tickets",
   "version": "1.0.0",
   "description": "Fetch and describe servicenow tickets with Hubot",
+  "repository": "github:manahl/hubot-servicenow-tickets",
   "main": "index.js",
   "scripts": {
     "lint": "eslint . --fix",
