@@ -20,7 +20,7 @@ Handlebars.registerHelper('linkify', function(text, recordId) {
   // Convert ticket references to clickable links.
   _.each(api.config.PREFIXES, function(prefix) {
     // This matches strings like 'CR1234' but not 'ABCR123'.
-    var ticketPattern = RegExp("\\b(" + prefix + "\\d+)\\b", "gi");
+    var ticketPattern = RegExp("\\b(" + prefix + "\\d+)\\b", "g");
     text = text.replace(ticketPattern, function(s) {
       if (s === recordId) {
         return s; // don't linkify references to the current record
