@@ -2,11 +2,11 @@
 //   Respond to any mentions of servicenow tickets, according to the
 //   prefixes defined in config.yaml.
 
-'use strict';
+"use strict";
 
-var api = require('servicenow-lite');
-var formatting = require('./formatting');
-var _ = require('underscore');
+var api = require("servicenow-lite");
+var formatting = require("./formatting");
+var _ = require("underscore");
 
 // Matches 'CR1234', 'CR1234' and '(CR1234' but not '=CR1234' (because
 // the latter tends to occur in direct URLs) and not 'CR01234'. Note
@@ -36,7 +36,11 @@ function describeRecord(response, recordPrefix) {
   _.each(_.uniq(recordIds), function(recordId) {
     api.getRecordById(recordId, function(err, details) {
       if (err) {
-        response.send("Failed to find " + recordPrefix + " data. See the log for more details.");
+        response.send(
+          "Failed to find " +
+            recordPrefix +
+            " data. See the log for more details."
+        );
         return console.error(err);
       } else if (details) {
         response.send(formatting.formatRows([details]));
@@ -80,6 +84,7 @@ module.exports = function(robot) {
 
     // Ensure 'hubot help' works for these dynamically defined commands.
     robot.commands.push(
-      prefix + "1234 - Reply with details and a link to this " + prefix + ".");
+      prefix + "1234 - Reply with details and a link to this " + prefix + "."
+    );
   });
 };
