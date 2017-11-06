@@ -59,9 +59,19 @@ module.exports = function(robot) {
   // details and show a link.
   function makeRecordHandler(prefix) {
     robot.hear(prefixRegexp(prefix), function(response) {
-      if (!looksLikeCommand(response.message.text, robot.name)) {
-        describeRecord(response, prefix);
+      if (looksLikeCommand(response.message.text, robot.name)) {
+        return;
       }
+
+      var ignoredUsers = process.env.HUBOT_SERVICENOW_IGNORE_USERS;
+      if (ignoredUsers) {
+        var user = response.message.user.name;
+        if (_.contains(ignoredUsers.split(","), user)) {
+          return;
+        }
+      }
+
+      describeRecord(response, prefix);
     });
   }
 

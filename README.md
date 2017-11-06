@@ -86,6 +86,9 @@ $ export NODE_TLS_REJECT_UNAUTHORIZED='0'
 
 # And if you depend on a proxy to access the web:
 $ export http_proxy=http://proxyuser:secretpassword@myproxy.example.com
+
+# If you have any other bots that you don't want to trigger this hubot:
+$ export HUBOT_SERVICENOW_IGNORE_USERS='bot1,bot2'
 ```
 
 ## Plugins available
