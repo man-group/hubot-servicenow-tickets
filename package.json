@@ -21,7 +21,7 @@
     "handlebars": "~3.0.3",
     "handlebars-helper-strict-equal": "^1.0.0",
     "moment": "^2.10.3",
-    "servicenow-lite": "^1.0.0",
+    "servicenow-lite": "^1.1.0",
     "underscore": "~1.8.3"
   },
   "devDependencies": {
