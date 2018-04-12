@@ -6,6 +6,7 @@
 var api = require("servicenow-lite");
 var formatting = require("./formatting");
 
+var path = require("path");
 var _ = require("underscore");
 var moment = require("moment");
 var express = require("express");
@@ -106,8 +107,12 @@ module.exports = function(robot) {
   robot.router.set("view engine", "html");
   robot.router.set("views", __dirname + "/views");
 
-  // Serve our own static content rather than CDNJS, so we don't leak referrers.
+  // Serve our own static content.
   robot.router.use("/static", express.static(__dirname + "/static"));
+
+  // Serve font-awesome from node_modules.
+  var fontAwesomePath = path.join(__dirname, "node_modules", "font-awesome");
+  robot.router.use("/static_font_awesome", express.static(fontAwesomePath));
 
   // Simple ticket web frontend that doesn't overwhelm the user.
   return robot.router.get(/\/servicenow\/([A-Z]+\d+)/, function(
