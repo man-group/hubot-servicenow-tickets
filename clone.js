@@ -1,19 +1,26 @@
 // Description:
 //  Command for cloning servicenow CRs.
 
-'use strict';
+"use strict";
 
-var api = require('servicenow-lite');
-var formatting = require('./formatting');
-var _ = require('underscore');
+var api = require("servicenow-lite");
+var formatting = require("./formatting");
+var _ = require("underscore");
 
 module.exports = function(robot) {
   // For every ticket prefix that we know how to clone, define a help command.
   _.each(api.config.PREFIXES, function(prefix) {
     var cloneFields = api.config.cloneFields(prefix);
     if (cloneFields) {
-      robot.commands.push("hubot clone " + prefix + "1234 - Create a new " + prefix +
-                          " whose fields match " + prefix + "1234.");
+      robot.commands.push(
+        "hubot clone " +
+          prefix +
+          "1234 - Create a new " +
+          prefix +
+          " whose fields match " +
+          prefix +
+          "1234."
+      );
     }
   });
 
@@ -22,15 +29,20 @@ module.exports = function(robot) {
     var prefix = api.config.getPrefix(recordId);
     var cloneFields = api.config.cloneFields(prefix);
     if (!cloneFields) {
-      response.send("I don't know how to clone a " + prefix +
-                    " (you need to see cloneFields in config.yaml).");
+      response.send(
+        "I don't know how to clone a " +
+          prefix +
+          " (you need to see cloneFields in config.yaml)."
+      );
       return;
     }
 
     api.getRecordById(recordId, function(err, details) {
       var hipchatUsername, knownUsers, newRecordDetails, servicenowUsername;
       if (err) {
-        response.send("Failed to clone " + recordId + ". See the log for more details.");
+        response.send(
+          "Failed to clone " + recordId + ". See the log for more details."
+        );
         console.error(err);
         return;
       }
@@ -45,14 +57,20 @@ module.exports = function(robot) {
       knownUsers = robot.brain.knownUsers || {};
       servicenowUsername = knownUsers[hipchatUsername];
       if (!servicenowUsername) {
-        response.send("I don't know your servicenow username. Please use:\n@" + robot.name +
-                      " my username is yournamehere");
+        response.send(
+          "I don't know your servicenow username. Please use:\n@" +
+            robot.name +
+            " my username is yournamehere"
+        );
         return;
       }
       api.getUser(servicenowUsername, function(err, user) {
         if (err) {
-          response.send("Could not find a servicenow user ID for " + servicenowUsername +
-                        ". See the log for more details.");
+          response.send(
+            "Could not find a servicenow user ID for " +
+              servicenowUsername +
+              ". See the log for more details."
+          );
           console.error(err);
           return;
         }
@@ -63,12 +81,18 @@ module.exports = function(robot) {
           var newTicketId;
           newTicketId = api.recordId(details);
           if (err) {
-            response.send("Failed to create " + prefix + ". See the log for more details.");
+            response.send(
+              "Failed to create " + prefix + ". See the log for more details."
+            );
             console.error(err);
           } else {
             response.send(
-              "Success! " + newTicketId + " created: " + formatting.directUrl(newTicketId),
-              "Amend your instructions, set the date, then submit!");
+              "Success! " +
+                newTicketId +
+                " created: " +
+                formatting.directUrl(newTicketId),
+              "Amend your instructions, set the date, then submit!"
+            );
           }
         });
       });

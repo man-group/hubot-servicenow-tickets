@@ -96,3 +96,11 @@ label {
     display: inline-block;
     min-width: 100px;
 }
+
+.cr-id {
+    color: #ccc;
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding: 20px;
+}

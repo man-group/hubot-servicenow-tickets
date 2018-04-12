@@ -5,11 +5,11 @@
 //   hubot find <text> - Find the latest tickets containing this text
 //   hubot created by <user/me> - Find the last tickets created by a user.
 
-'use strict';
+"use strict";
 
-var api = require('servicenow-lite');
-var formatting = require('./formatting');
-var _ = require('underscore');
+var api = require("servicenow-lite");
+var formatting = require("./formatting");
+var _ = require("underscore");
 
 // Remove records that don't have a date associated.
 function dropUndatedRecords(records) {
@@ -25,8 +25,12 @@ function dropUndatedRecords(records) {
 }
 
 module.exports = function(robot) {
-  robot.commands.push("hubot find <text> - Find the latest tickets containing this text");
-  robot.commands.push("hubot created by <user/me> - Find the last tickets created by a user.");
+  robot.commands.push(
+    "hubot find <text> - Find the latest tickets containing this text"
+  );
+  robot.commands.push(
+    "hubot created by <user/me> - Find the last tickets created by a user."
+  );
 
   // List all the records created by a user.
   robot.respond(/created by (.*)/i, function(response) {
@@ -38,7 +42,8 @@ module.exports = function(robot) {
       if (!windowsUsername) {
         response.send(
           "I don't know your windows username. Please use:\n" +
-          `@${robot.name} my username is yournamehere`);
+            `@${robot.name} my username is yournamehere`
+        );
         return;
       }
       creator = windowsUsername;
@@ -46,7 +51,9 @@ module.exports = function(robot) {
 
     api.recordsCreatedBy(creator, function(err, results) {
       if (err) {
-        response.send("Failed to find any results. See the log for more details.");
+        response.send(
+          "Failed to find any results. See the log for more details."
+        );
         console.error(err);
         return;
       }
@@ -63,7 +70,9 @@ module.exports = function(robot) {
     var searchTerm = response.match[1];
     api.search(searchTerm, function(err, results) {
       if (err) {
-        response.send("Failed to find any results. See the log for more details.");
+        response.send(
+          "Failed to find any results. See the log for more details."
+        );
         console.error(err);
         return;
       }
