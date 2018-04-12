@@ -1,5 +1,7 @@
 # hubot-servicenow-tickets
 
+[![NPM](https://nodei.co/npm/hubot-servicenow-tickets.png?compact=true)](https://nodei.co/npm/hubot-servicenow-tickets/)
+
 Hubot enriches your discussions of servicenow tickets.
 
 ```
@@ -239,3 +241,10 @@ tables:
           - backout_plan
 ```
 
+## Releasing new versions
+
+```
+$ npm version
+$ git push --tags
+$ npm publish
+```

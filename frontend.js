@@ -111,7 +111,10 @@ module.exports = function(robot) {
   robot.router.use("/static", express.static(__dirname + "/static"));
 
   // Serve font-awesome from node_modules.
-  var fontAwesomePath = path.join(__dirname, "node_modules", "font-awesome");
+  var fontAwesomePath = path.dirname(
+    require.resolve("font-awesome/package.json")
+  );
+
   robot.router.use("/static_font_awesome", express.static(fontAwesomePath));
 
   // Simple ticket web frontend that doesn't overwhelm the user.
