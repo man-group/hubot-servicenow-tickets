@@ -15,12 +15,13 @@ Hubot> CR1234: System has turned sentient (22 Sep 2029) https://servicenow.examp
 - [hubot-servicenow-tickets](#hubot-servicenow-tickets)
     - [Installation](#installation)
     - [Plugins available](#plugins-available)
-        - [hubot-servicenow-tickets/mentions](#hubot-servicenowmentions)
-        - [hubot-servicenow-tickets/find](#hubot-servicenowfind)
-        - [hubot-servicenow-tickets/users](#hubot-servicenowusers)
-        - [hubot-servicenow-tickets/clone](#hubot-servicenowclone)
-        - [hubot-servicenow-tickets/debug](#hubot-servicenowdebug)
-        - [hubot-servicenow-tickets/frontend](#hubot-servicenowfrontend)
+        - [hubot-servicenow-tickets/mentions](#hubot-servicenow-ticketsmentions)
+        - [hubot-servicenow-tickets/find](#hubot-servicenow-ticketsfind)
+        - [hubot-servicenow-tickets/users](#hubot-servicenow-ticketsusers)
+        - [hubot-servicenow-tickets/clone](#hubot-servicenow-ticketsclone)
+        - [hubot-servicenow-tickets/debug](#hubot-servicenow-ticketsdebug)
+        - [hubot-servicenow-tickets/frontend](#hubot-servicenow-ticketsfrontend)
+    - [Releasing new versions](#releasing-new-versions)
 
 <!-- markdown-toc end -->
 
