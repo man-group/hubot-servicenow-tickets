@@ -6,9 +6,9 @@
 //   hubot known users - List all the windows users associated with hipchat users.
 //   hubot my username is <username> - Save your username.
 
-'use strict';
+"use strict";
 
-var _ = require('underscore');
+var _ = require("underscore");
 
 function describeUsers(users) {
   if (users.length == 0) {
@@ -17,11 +17,13 @@ function describeUsers(users) {
   if (users.length == 1) {
     return "I know 1 username:\n" + users[0];
   }
-  return "I know " + users.length + " usernames:\n" + users.join('\n');
+  return "I know " + users.length + " usernames:\n" + users.join("\n");
 }
 
 module.exports = function(robot) {
-  robot.commands.push("hubot known users - List all the windows users associated with hipchat users.");
+  robot.commands.push(
+    "hubot known users - List all the windows users associated with hipchat users."
+  );
   robot.commands.push("hubot my username is <username> - Save your username.");
 
   robot.respond(/known users/i, function(response) {
@@ -32,8 +34,12 @@ module.exports = function(robot) {
     var rows = hipchatNames.map(function(hipchatName) {
       return hipchatName + " -- " + knownUsers[hipchatName];
     });
-    response.send(describeUsers(rows) + "\nTo add your username:\n@" + robot.name +
-                  " my username is yourusernamehere");
+    response.send(
+      describeUsers(rows) +
+        "\nTo add your username:\n@" +
+        robot.name +
+        " my username is yourusernamehere"
+    );
   });
 
   robot.respond(/my username is (.*)/i, function(response) {
@@ -45,7 +51,12 @@ module.exports = function(robot) {
 
     // Log this, so we have a record if users impersonate others.
     /* eslint-disable no-console */
-    console.log(['saved chatroom user', hipchatName, 'to servicenow user', servicenowName]);
-    response.send('OK, saved.');
+    console.log([
+      "saved chatroom user",
+      hipchatName,
+      "to servicenow user",
+      servicenowName
+    ]);
+    response.send("OK, saved.");
   });
 };

@@ -1,9 +1,9 @@
-'use strict';
+"use strict";
 
-var _ = require('underscore');
-var os = require('os');
-var moment = require('moment');
-var api = require('servicenow-lite');
+var _ = require("underscore");
+var os = require("os");
+var moment = require("moment");
+var api = require("servicenow-lite");
 
 // Return a frontend URL if we're configured to render this record,
 // otherwise a direct URL to service now.
@@ -12,9 +12,13 @@ function frontendUrl(recordId) {
 }
 
 function directUrl(recordId) {
-  return api.config.ROOT_URL +
-          "/nav_to.do?uri=" + api.config.tableName(recordId) +
-          ".do?sys_id=" + recordId;
+  return (
+    api.config.ROOT_URL +
+    "/nav_to.do?uri=" +
+    api.config.tableName(recordId) +
+    ".do?sys_id=" +
+    recordId
+  );
 }
 
 function url(recordId) {
@@ -32,7 +36,7 @@ function formatRows(rows) {
     var shortDescription = row.short_description || "(no description)";
     var id = api.recordId(row);
     var endDateGmt = row[api.config.dateField(id)];
-    var endDate = endDateGmt ? moment(endDateGmt).format('DD MMM YYYY') : null;
+    var endDate = endDateGmt ? moment(endDateGmt).format("DD MMM YYYY") : null;
 
     var ticketUrl = url(id);
     if (endDate) {

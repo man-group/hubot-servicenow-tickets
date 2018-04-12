@@ -1,17 +1,17 @@
 // Description:
 //   Shows a friendly, simplified web page describing CRs.
 
-'use strict';
+"use strict";
 
-var api = require('servicenow-lite');
-var formatting = require('./formatting');
+var api = require("servicenow-lite");
+var formatting = require("./formatting");
 
-var _ = require('underscore');
-var moment = require('moment');
-var express = require('express');
-var consolidate = require('consolidate');
+var _ = require("underscore");
+var moment = require("moment");
+var express = require("express");
+var consolidate = require("consolidate");
 
-require('./handlebars_helpers');
+require("./handlebars_helpers");
 
 // Return true for strings like 'None', 'N/A', 'None.' and '.', where
 // there's no point showing them.
@@ -26,12 +26,12 @@ function shouldHide(stepStr) {
 
 // Ensure we use unix line endings and collapse excessive newlines.
 function cleanLineEndings(str) {
-  return str.replace(/\r\n/g, '\n').replace(/\n\n\n/g, '\n\n');
+  return str.replace(/\r\n/g, "\n").replace(/\n\n\n/g, "\n\n");
 }
 
 function formatDate(d) {
   if (d) {
-    return moment(d).format('DD MMM YYYY');
+    return moment(d).format("DD MMM YYYY");
   } else {
     return "";
   }
@@ -87,7 +87,8 @@ function fetchDetails(recordId, callback) {
       callback(null, {
         recordId: recordId,
         url: formatting.directUrl(recordId),
-        short_description: recordDetails.short_description || "(no description)",
+        short_description:
+          recordDetails.short_description || "(no description)",
         description: recordDetails.description,
         creator: recordDetails.sys_created_by,
         end_date: formatDate(recordDetails[api.config.dateField(recordId)]),
@@ -101,29 +102,40 @@ function fetchDetails(recordId, callback) {
 }
 
 module.exports = function(robot) {
-  robot.router.engine('html', consolidate.handlebars);
-  robot.router.set('view engine', 'html');
-  robot.router.set('views', __dirname + '/views');
+  robot.router.engine("html", consolidate.handlebars);
+  robot.router.set("view engine", "html");
+  robot.router.set("views", __dirname + "/views");
 
   // Serve our own static content rather than CDNJS, so we don't leak referrers.
-  robot.router.use('/static', express.static(__dirname + '/static'));
+  robot.router.use("/static", express.static(__dirname + "/static"));
 
   // Simple ticket web frontend that doesn't overwhelm the user.
-  return robot.router.get(/\/servicenow\/([A-Z]+\d+)/, function(request, response) {
+  return robot.router.get(/\/servicenow\/([A-Z]+\d+)/, function(
+    request,
+    response
+  ) {
     var recordId = request.params[0];
     var prefix = api.config.getPrefix(recordId);
     if (!api.config.webFields(recordId)) {
-      response.end("I don't know how to display a " + prefix + " (you need to set web_fields in config.yaml).");
+      response.end(
+        "I don't know how to display a " +
+          prefix +
+          " (you need to set web_fields in config.yaml)."
+      );
       return;
     }
     fetchDetails(recordId, function(err, details) {
       if (err) {
-        response.end("Failed to fetch " + prefix + " details. See the log for more details.");
+        response.end(
+          "Failed to fetch " +
+            prefix +
+            " details. See the log for more details."
+        );
         console.error(err);
         return;
       }
       if (details) {
-        response.render('view_record', details);
+        response.render("view_record", details);
       } else {
         response.end("No such " + prefix + ".");
       }
