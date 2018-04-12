@@ -245,7 +245,7 @@ tables:
 ## Releasing new versions
 
 ```
-$ npm version
+$ npm version minor
 $ git push --tags
 $ npm publish
 ```
