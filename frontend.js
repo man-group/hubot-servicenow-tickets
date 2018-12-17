@@ -32,7 +32,17 @@ function cleanLineEndings(str) {
 
 function formatDate(d) {
   if (d) {
+    // 14 Jun 2018
     return moment(d).format("DD MMM YYYY");
+  } else {
+    return "";
+  }
+}
+
+function formatDateTime(d) {
+  if (d) {
+    // Sunday, February 14th 2010, 3:25:50 pm
+    return moment(d).format("dddd, MMMM Do YYYY, h:mm:ss a");
   } else {
     return "";
   }
@@ -92,7 +102,7 @@ function fetchDetails(recordId, callback) {
           recordDetails.short_description || "(no description)",
         description: recordDetails.description,
         creator: recordDetails.sys_created_by,
-        end_date: formatDate(recordDetails[api.config.dateField(recordId)]),
+        end_date: formatDateTime(recordDetails[api.config.dateField(recordId)]),
         state: recordDetails.state,
         approval: recordDetails.approval,
         steps: steps,
