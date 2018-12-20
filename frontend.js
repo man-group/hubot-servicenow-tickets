@@ -42,7 +42,7 @@ function formatDate(d) {
 function formatDateTime(d) {
   if (d) {
     // Sunday, February 14th 2010, 3:25:50 pm
-    return moment(d).format("dddd, MMMM Do YYYY, h:mm:ss a");
+    return moment(d).format("dddd, MMMM Do YYYY, H:mm:ss ZZ");
   } else {
     return "";
   }
