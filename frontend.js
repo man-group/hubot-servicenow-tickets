@@ -26,8 +26,12 @@ function shouldHide(stepStr) {
 }
 
 // Ensure we use unix line endings and collapse excessive newlines.
-function cleanLineEndings(str) {
-  return str.replace(/\r\n/g, "\n").replace(/\n\n\n/g, "\n\n");
+function cleanLineEndings(value) {
+  if (value instanceof String) {
+    return value.replace(/\r\n/g, "\n").replace(/\n\n\n/g, "\n\n");
+  }
+  
+  return value;
 }
 
 function formatDate(d) {
