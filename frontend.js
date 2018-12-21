@@ -26,13 +26,27 @@ function shouldHide(stepStr) {
 }
 
 // Ensure we use unix line endings and collapse excessive newlines.
-function cleanLineEndings(str) {
-  return str.replace(/\r\n/g, "\n").replace(/\n\n\n/g, "\n\n");
+function cleanLineEndings(value) {
+  if (value instanceof String) {
+    return value.replace(/\r\n/g, "\n").replace(/\n\n\n/g, "\n\n");
+  }
+  
+  return value;
 }
 
 function formatDate(d) {
   if (d) {
+    // 14 Jun 2018
     return moment(d).format("DD MMM YYYY");
+  } else {
+    return "";
+  }
+}
+
+function formatDateTime(d) {
+  if (d) {
+    // Sunday, February 14th 2010, 15:25:50 +0000
+    return moment(d).format("dddd, MMMM Do YYYY, H:mm:ss ZZ");
   } else {
     return "";
   }
@@ -92,7 +106,7 @@ function fetchDetails(recordId, callback) {
           recordDetails.short_description || "(no description)",
         description: recordDetails.description,
         creator: recordDetails.sys_created_by,
-        end_date: formatDate(recordDetails[api.config.dateField(recordId)]),
+        end_date: formatDateTime(recordDetails[api.config.dateField(recordId)]),
         state: recordDetails.state,
         approval: recordDetails.approval,
         steps: steps,
