@@ -21,13 +21,16 @@ function shouldHide(stepStr) {
   if (!stepStr) {
     return true;
   }
+  if (typeof(stepStr) != "string") {
+    return false;
+  }
   cleaned = stepStr.toLowerCase().replace(/[^a-z0-9]+/i, " ").trim();
   return cleaned.length <= 4;
 }
 
 // Ensure we use unix line endings and collapse excessive newlines.
 function cleanLineEndings(value) {
-  if (value instanceof String) {
+  if (typeof(value) == "string") {
     return value.replace(/\r\n/g, "\n").replace(/\n\n\n/g, "\n\n");
   }
   
